@@ -1,21 +1,18 @@
-import discord
+import discord, os, asyncio
 from discord.ext import commands
-import os
 
-def main():
-    prefix = '!'
+async def main():
+    prefix = '/'
     intents = discord.Intents.all()
 
-    client = commands.Bot(command_prefix=prefix, intents=intents)
+    bot = commands.Bot(command_prefix=prefix, intents=intents)
 
-    @client.command(name='ping')
-    async def _ping(ctx):
-        await ctx.send("pong!")
+    await bot.load_extension('cogs.vote')
 
     with open('token.txt', 'r') as f:
         token = f.read()
 
-    client.run(token)
+    await bot.start(token)
 
-if __name__=='__main__':
-    main()
+if __name__ == '__main__':
+    asyncio.run(main())
