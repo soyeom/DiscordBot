@@ -6,11 +6,11 @@ class Vote(commands.Cog):
         self.bot = bot
 
     @commands.command(name='vote')
-    async def vote(self, ctx, *args):
-        question = ' '.join(args[:-1])
+    async def vote(self, ctx, *options):
+        question = ' '.join(options[:-1])
         answers = options[-1]
 
-        embed = discord.Embed(title = question, description=answers)
+        embed = discord.Embed(title = question, description=answers, color = discord.Color.green())
 
         message = await ctx.send(embed = embed)
 
